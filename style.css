@@ -1,0 +1,89 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#container-menu {
+    background-color: black;
+    height: 100vh;
+    color: white;
+    width: 350px;
+    padding-top: 40px;
+}
+
+#container-menu h3 {
+    color: white;
+    padding: 40px;
+    margin: 0 0 40px 0;
+    font: normal bold 22px arial, sans-serif;
+}
+
+#container-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#container-nav ul li {
+    padding: 15px 0;
+    margin: 15px 0;
+}
+
+#container-nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 10px 30px;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+#container-nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.257);
+}
+
+#conteudo {
+    flex: 1;
+    padding: 20px;
+    margin-left: 150px;
+    margin-top: 100px;
+}
+
+#conteudo h1 {
+    font: normal bold 30px;
+    margin-bottom: 26px;
+}
+
+#texto {
+    font: normal normal 24px arial, sans-serif;
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid rgba(173, 173, 173, 0.879);
+    border-radius: 6px;
+    background-color: white;
+    width: 800px;
+}
+
+#entrada {
+    padding: 20px;
+    font-size: 18px;
+    width: 80%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+#estatisticas,
+#tempoRestante {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
