@@ -9,26 +9,19 @@ const niveis = [
 ];
 
 const links = document.querySelectorAll("#niveis li a");
+const entrada = document.querySelector("#entrada");
+const contadorTempo = document.querySelector("#contadorTempo");
+
+let contadorTempoValue = parseInt(contadorTempo.innerHTML);
 
 let intervaloTempo; // Variável para armazenar a váriavel tempo
 let tempoIniciado = false; // Para ver se o tempo já foi iniciado
 
+// Função para atualizar de texto a cada click no link
 function atualizarTexto (indice) {
     const textoMudar = document.querySelector("#texto");
     textoMudar.textContent = niveis[indice];
 };
-
-links.forEach((link, index) => {
-    link.addEventListener("click", (evento) => {
-        evento.preventDefault();
-        // Desabilitar o input
-        const input = document.querySelector("#entrada");
-        input.style.display = 'block'; // Torna o campo input visível
-        input.disabled = false; // Habilita o campo input
-
-        atualizarTexto(index);
-    });
-});
 
 // Função para iniciar o tempo
 function iniciarContagemTempo () {
@@ -36,9 +29,6 @@ function iniciarContagemTempo () {
         return; // Impede que a contagem começe mais de uma vez
     }
     tempoIniciado = true; // Marca que o tempo foi iniciado
-
-    const contadorTempo = document.querySelector("#contadorTempo");
-    let contadorTempoValue = parseInt(contadorTempo.innerHTML);
 
     intervaloTempo = setInterval (() => {
         if (contadorTempoValue === 0) { // Se chegou realmente à zero
@@ -68,8 +58,47 @@ function criarElementos (father) {
     return novoElemento;
 };
 
+// Função para limpar todos os campos
+function limparCampos () {
+    // Campo de input
+    entrada.value = '';
+    entrada.disabled = true;
+
+    // Campos de contadores
+    const contadorCorreto = document.querySelector("#contadorCorreto");
+    contadorCorreto.textContent = '0'; // Resetar contador de acertos
+    const contadorErrado = document.querySelector("#contadorErrado");
+    contadorErrado.textContent = '0';  // Resetar contador de erros
+
+    // Limpar o tempo restante
+    const contadorTempo = document.querySelector("#contadorTempo");
+    contadorTempo.textContent = '60';
+
+    tempoIniciado = false;
+
+    contadorTempoValue = 60;
+    tempoIniciado = false;
+
+    if (intervaloTempo) {
+        clearInterval(intervaloTempo)
+    }
+};
+
+// Em cada link, limpar todos os campos e trocar de texto
+links.forEach((link, index) => {
+    link.addEventListener("click", (evento) => {
+        evento.preventDefault();
+
+        limparCampos();
+        const input = document.querySelector("#entrada");
+        input.disabled = false; // Habilita o campo input
+
+        atualizarTexto(index);
+    });
+});
+
 // Evento que aciona a contagem do tempo assim que clica no input
 const entradaInput = document.querySelector("#entrada");
-entradaInput.addEventListener("click", (evento) => {
+entradaInput.addEventListener("input", () => {
     iniciarContagemTempo();
 });
