@@ -9,6 +9,7 @@ const niveis = [
 ];
 
 const links = document.querySelectorAll("#niveis li a");
+const textoMudar = document.querySelector("#texto");
 const entrada = document.querySelector("#entrada");
 const contadorCorreto = document.querySelector("#contadorCorreto");
 const contadorErrado = document.querySelector("#contadorErrado");
@@ -21,8 +22,16 @@ let tempoIniciado = false; // Para ver se o tempo já foi iniciado
 
 // Função para atualizar de texto a cada click no link
 function atualizarTexto (indice) {
-    const textoMudar = document.querySelector("#texto");
-    textoMudar.textContent = niveis[indice];
+    const todosTextos = niveis[indice];
+
+    textoMudar.innerHTML = '';
+
+    // Dividir os textos em caracteres dentro de spans
+    todosTextos.split('').forEach((caracter) => {
+        const span = document.createElement("span");
+        span.textContent = caracter;
+        textoMudar.appendChild(span);
+    });
 };
 
 // Função para iniciar o tempo
@@ -96,6 +105,11 @@ links.forEach((link, index) => {
 
         limparCampos(); // Limpar todos os campos
 
+        const span = document.querySelector(".finalizado");
+        if (span) {
+            span.remove();
+        }
+
         entrada.disabled = false; // Habilita o campo input
 
         atualizarTexto(index);
@@ -105,4 +119,46 @@ links.forEach((link, index) => {
 // Evento que aciona a contagem do tempo assim que digita algo no input
 entrada.addEventListener("input", () => {
     iniciarContagemTempo();
+
+    const entradaCaracter = entrada.value.split(''); // Input
+    const textoCaracter = textoMudar.querySelectorAll('span'); // Original
+
+    let acertos = 0;
+    let erros = 0;
+    
+    // Percorrer os caracteres de ambos
+    entradaCaracter.forEach((caracter, index) => {
+        if (index < textoCaracter.length) { // Ver se o index existe
+            const letraSpan = textoCaracter[index];
+
+            letraSpan.classList.remove('certo', 'errado'); // Remove as classes
+
+            if (caracter === letraSpan.textContent) {
+                letraSpan.classList.add("certo");
+                acertos ++;
+            } else {
+                letraSpan.classList.add("errado")
+                erros ++;
+            }
+        }
+    });
+
+    // Verifica se o texto foi digitado completamente
+    if (acertos === textoCaracter.length) {
+        setTimeout (() => {
+            const containerConteudo = contadorTempo.closest("#conteudo");
+            const spanElement = document.createElement("span");
+            spanElement.setAttribute("class", "finalizado");
+            spanElement.innerHTML = `Parabéns!! Você finalizou esse nível!`;
+
+            containerConteudo.appendChild(spanElement);
+
+            limparCampos();
+        }, 500);
+    }
+
+    // Atualizar o texto contido na página
+    contadorCorreto.textContent = acertos;
+    contadorErrado.textContent = erros;   
+
 });

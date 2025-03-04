@@ -93,3 +93,16 @@ body {
     color: red;
     padding: 5px 0 10px 0;
 }
+
+.certo {
+    color: blue;
+}
+
+.errado {
+    color: red;
+}
+
+.finalizado {
+    font-weight: bold;
+    color: green;
+}
