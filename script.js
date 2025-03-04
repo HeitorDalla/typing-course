@@ -10,6 +10,8 @@ const niveis = [
 
 const links = document.querySelectorAll("#niveis li a");
 const entrada = document.querySelector("#entrada");
+const contadorCorreto = document.querySelector("#contadorCorreto");
+const contadorErrado = document.querySelector("#contadorErrado");
 const contadorTempo = document.querySelector("#contadorTempo");
 
 let contadorTempoValue = parseInt(contadorTempo.innerHTML);
@@ -25,22 +27,23 @@ function atualizarTexto (indice) {
 
 // Função para iniciar o tempo
 function iniciarContagemTempo () {
+    // Impede que a contagem começe mais de uma vez
     if (tempoIniciado) {
-        return; // Impede que a contagem começe mais de uma vez
+        return;
     }
+
     tempoIniciado = true; // Marca que o tempo foi iniciado
 
     intervaloTempo = setInterval (() => {
         if (contadorTempoValue === 0) { // Se chegou realmente à zero
-            clearInterval(intervaloTempo);
+            clearInterval(intervaloTempo); // Para o tempo
 
             // Cria o elemento
             const containerConteudo = contadorTempo.closest("#conteudo");
             let errorSpan = criarElementos(containerConteudo);
             errorSpan.innerHTML = `O seu tempo acabou!`;
 
-            const input = document.querySelector("#entrada");
-            input.disabled = true;
+            entrada.disabled = true;
 
         } else {
             contadorTempoValue --; // Decrementa 1 segundo
@@ -60,45 +63,46 @@ function criarElementos (father) {
 
 // Função para limpar todos os campos
 function limparCampos () {
-    // Campo de input
-    entrada.value = '';
-    entrada.disabled = true;
+    // Campo de entrada
+    entrada.value = ''; // Limpa qualquer valor existente
+    entrada.disabled = true; // Desabilita o input
 
     // Campos de contadores
-    const contadorCorreto = document.querySelector("#contadorCorreto");
     contadorCorreto.textContent = '0'; // Resetar contador de acertos
-    const contadorErrado = document.querySelector("#contadorErrado");
     contadorErrado.textContent = '0';  // Resetar contador de erros
 
     // Limpar o tempo restante
-    const contadorTempo = document.querySelector("#contadorTempo");
     contadorTempo.textContent = '60';
-
-    tempoIniciado = false;
-
     contadorTempoValue = 60;
-    tempoIniciado = false;
 
-    if (intervaloTempo) {
+    // Se o tempo acabar, remover o elemento
+    const errorSpan = document.querySelector(".error");
+    if (errorSpan) {
+        errorSpan.remove();
+    }
+
+    tempoIniciado = false; // Barreira para reforçar que o tempo é zerado
+
+    if (intervaloTempo) { // Verifica se o tempo ja foi iniciado
         clearInterval(intervaloTempo)
+        intervaloTempo = null;
     }
 };
 
 // Em cada link, limpar todos os campos e trocar de texto
 links.forEach((link, index) => {
-    link.addEventListener("click", (evento) => {
-        evento.preventDefault();
+    link.addEventListener("click", (event) => {
+        event.preventDefault(); // Impede o envio automático
 
-        limparCampos();
-        const input = document.querySelector("#entrada");
-        input.disabled = false; // Habilita o campo input
+        limparCampos(); // Limpar todos os campos
+
+        entrada.disabled = false; // Habilita o campo input
 
         atualizarTexto(index);
     });
 });
 
-// Evento que aciona a contagem do tempo assim que clica no input
-const entradaInput = document.querySelector("#entrada");
-entradaInput.addEventListener("input", () => {
+// Evento que aciona a contagem do tempo assim que digita algo no input
+entrada.addEventListener("input", () => {
     iniciarContagemTempo();
 });
