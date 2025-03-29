@@ -2,7 +2,7 @@
 Esse projeto é um curso de digitação desenvolvido com as tecnologias de HTML, CSS e Javascript. Esse projeto tem o objetivo de divertir e treinar os usuários a treinar a digitação com o problema da vida real, o tempo!
 
 ## Visualização do Projeto
-(https://heitordalla.github.io/typing-course/)
+<a href="https://heitordalla.github.io/typing-course/" target="_blank">Visualização do Projeto</a>
 
 ## Funcionalidades
 - Exibi diferentes níveis de digitação, do básico ao avançado.
@@ -26,4 +26,4 @@ Esse projeto é um código aberto e todas as modificações são bem-vindas! Fiq
 ## Contato
 - Criado por Heitor Giussani Dalla Villa
 - E-mail: heitorvillavilla@gmail.com
-- Linkedin: https://www.linkedin.com/in/heitordallavilla
+- <a href="https://www.linkedin.com/in/heitordallavilla" target="_blank">Linkedin</a>
