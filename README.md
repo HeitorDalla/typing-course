@@ -1,6 +1,13 @@
 # Curso de Digitação
 Esse projeto é um curso de digitação desenvolvido com as tecnologias de HTML, CSS e Javascript. Esse projeto tem o objetivo de divertir e treinar os usuários a treinar a digitação com o problema da vida real, o tempo!
 
+## Tecnologias utilizadas
+Essse projeto foi desenvolvido seguindo as seguintes tecnologias:
+
+- HTML - Estrutura o layout da página (https://html.com/) 
+- CSS - Estiliza o layout (https://css.com/)
+- JavaScript - Implementa a lógica desde a entrada do usuário até na contagem de tempo faltante (https://www.javascript.com/)
+
 ## Visualização do Projeto
 (https://heitordalla.github.io/typing-course/)
 
